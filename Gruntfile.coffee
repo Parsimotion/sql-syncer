@@ -316,7 +316,7 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
       # This should be the name of your apps angular module
-        module: "integration-seed-app"
+        module: "sql-syncer-app"
         htmlmin:
           collapseBooleanAttributes: true
           collapseWhitespace: true
@@ -391,7 +391,7 @@ module.exports = (grunt) ->
 
       azureproduction:
         options:
-          remote: "https://#{process.env.AZURE_GIT_CREDENTIALS}@integration-seed.scm.azurewebsites.net:443/integration-seed.git"
+          remote: "https://#{process.env.AZURE_GIT_CREDENTIALS}@sql-syncer.scm.azurewebsites.net:443/sql-syncer.git"
           branch: "master"
 
       openshift:

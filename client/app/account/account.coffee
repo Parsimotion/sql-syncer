@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'integration-seed-app'
+angular.module 'sql-syncer-app'
 .config ($stateProvider) ->
   $stateProvider
   .state 'login',

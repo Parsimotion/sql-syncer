@@ -3,7 +3,7 @@ $scope = null
 getController = null
 
 beforeEach ->
-  module "integration-seed-app"
+  module "sql-syncer-app"
 
   inject ($controller, $rootScope, _$httpBackend_, observeOnScope) ->
     $httpBackend = _$httpBackend_

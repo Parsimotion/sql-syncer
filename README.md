@@ -1,5 +1,5 @@
-# integration-seed
-Please, replace the string "integration-seed" with the name you want, in all the project.
+# sql-syncer
+Please, replace the string "sql-syncer" with the name you want, in all the project.
 
 ## Setup
 
