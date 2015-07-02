@@ -1,8 +1,28 @@
 .form-group
-  label Algún campo, por ejemplo: User
-  input.form-control(type='text', name='username', ng-model='settings.username')
+  label Motor de SQL
+    select.form-control(name="engine", ng-model='settings.engine')
+      option(value="mysql") MySQL
+      option(value="sqlserver") SQL Server
 
-  label Algún otro campo, por ejemplo: Password
-  input.form-control(type='password', name='password', ng-model='settings.password')
+.form-group
+  label Cadena de conexión
+  input.monospaced.form-control(name='connectionString', ng-model='settings.connectionString')
+
+  div.alert.alert-info(ng-show="settings.engine == 'mysql'")
+    | Ejemplo:
+    span.monospaced  Server=hostDeMiServidor;Port=miPuerto;Database=miBaseDeDatos;Uid=miUsuario;Pwd=miContraseña;
+  div.alert.alert-info(ng-show="settings.engine == 'sqlserver'")
+    | Ejemplo:
+    span.monospaced  Server=hostDeMiServidor,miPuerto;Database=miBaseDeDatos;User Id=miUsuario;Password=miContraseña;
+
+.form-group
+  label Consulta de stocks y precios
+  textarea.monospaced.form-control(name="query", ng-model='settings.query', rows="8")
+
+  div.large-info.alert.alert-info
+    | #[strong Columnas requeridas:] #[br]
+    | [barcode|sku]: (String) Identificador del producto.
+    | stock: (Entero) Cantidad disponible.
+    | price: (Flotante) Precio de venta.
 
 button.btn.btn-info(ui-sref='settings.step2') Continuar
