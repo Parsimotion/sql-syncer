@@ -10,3 +10,6 @@ angular.module 'sql-syncer-app'
 
   $scope.isActive = (route) ->
     route is $location.path()
+
+  $scope.logout = ->
+    window.location = "/logout"
