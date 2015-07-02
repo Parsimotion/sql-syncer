@@ -12,3 +12,17 @@ app.factory "Producteca", ($resource) ->
           method: "GET"
           url: "#{endpoint}/user/me"
           transformRequest: setAuthorizationHeader
+
+        priceLists:
+          method: "GET"
+          url: "#{endpoint}/pricelists"
+          transformRequest: setAuthorizationHeader
+          transformResponse: toNames
+          isArray: true
+
+        warehouses:
+          method: "GET"
+          url: "#{endpoint}/warehouses"
+          transformRequest: setAuthorizationHeader
+          transformResponse: toNames
+          isArray: true

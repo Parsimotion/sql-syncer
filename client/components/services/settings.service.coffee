@@ -10,3 +10,11 @@ app.factory "Settings", ($resource) ->
       method: "PUT"
       transformRequest: (settings) ->
         JSON.stringify settings
+
+app.factory "Users", ($resource) ->
+  $resource "/api/users/me", {},
+    me:
+      isArray: false
+      transformResponse: (data) ->
+        settings = JSON.parse data
+        settings
