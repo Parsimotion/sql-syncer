@@ -1,5 +1,5 @@
 # sql-syncer
-Please, replace the string "sql-syncer" with the name you want, in all the project.
+[![Build Status](https://semaphoreci.com/api/v1/projects/51c42aae-cc28-4ee4-b7ee-52ff23e9bf44/471856/badge.svg)](https://semaphoreci.com/andreskir/sql-syncer)
 
 ## Setup
 
