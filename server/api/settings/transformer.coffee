@@ -35,7 +35,7 @@ module.exports = new Transformer [
 ,
   from: "settings.engine", to: "engine"
 ,
-  from: "settings.connectionString", to: "connectionString"
+  from: "settings.connection", to: "connection"
 ,
   from: "settings.query", to: "query"
 ,

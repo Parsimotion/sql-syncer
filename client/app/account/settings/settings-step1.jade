@@ -4,16 +4,22 @@
       option(value="mysql") MySQL
       option(value="sqlserver") SQL Server
 
-.form-group
-  label Cadena de conexión
-  input.monospaced.form-control(name='connectionString', ng-model='settings.connectionString')
+div.form-group
+  div.row
+    div.col-md-12
+      div.row
+        div.col-md-6
+          label Host
+          input.monospaced.form-control(name='connectionString', ng-model='settings.connection.host')
 
-  div.alert.alert-info(ng-show="settings.engine == 'mysql'")
-    | Ejemplo:
-    span.monospaced  Server=hostDeMiServidor;Port=miPuerto;Database=miBaseDeDatos;Uid=miUsuario;Pwd=miContraseña;
-  div.alert.alert-info(ng-show="settings.engine == 'sqlserver'")
-    | Ejemplo:
-    span.monospaced  Server=hostDeMiServidor,miPuerto;Database=miBaseDeDatos;User Id=miUsuario;Password=miContraseña;
+          label Base de datos
+          input.monospaced.form-control(name='connectionString', ng-model='settings.connection.database')
+        div.col-md-6
+          label Usuario
+          input.monospaced.form-control(name='connectionString', ng-model='settings.connection.username')
+
+          label Contraseña
+          input.monospaced.form-control(type='password', name='connectionString', ng-model='settings.connection.password')
 
 .form-group
   label Consulta de stocks y precios

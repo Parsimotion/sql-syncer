@@ -30,7 +30,11 @@ UserSchema = new Schema
   settings:
     saved: Boolean
     engine: String
-    connectionString: String
+    connection:
+      host: String
+      database: String
+      username: String
+      password: String
     query: String
     priceList: String
     warehouse: String
