@@ -1,5 +1,23 @@
-mysql = require("mysql")
+Promise = require("bluebird")
+mysql = Promise.promisifyAll require("mysql")
 module.exports =
 
+# A MySql query.
+# connection = { host, username, password, database }
 class MySqlQuery
-  constructor: (@connectionString) ->
+  constructor: (@connection) ->
+
+  # Executes the query and returns a promise with the results.
+  get: (query) =>
+    session = mysql.createConnection
+      host: @connection.host
+      database: @connection.database
+      user: @connection.username
+      password: @connection.password
+
+    session.connect()
+
+    session.queryAsync(query)
+      .spread (rows, fields) =>
+        { rows, fields }
+      .finally => session.end()
