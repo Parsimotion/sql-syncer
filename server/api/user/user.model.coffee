@@ -10,6 +10,7 @@ authTypes = ["producteca"]
 
 UserSchema = new Schema
   name: String
+
   email:
     type: String
     lowercase: true
@@ -26,6 +27,11 @@ UserSchema = new Schema
 
   settings:
     saved: Boolean
+    engine: String
+    connectionString: String
+    query: String
+    priceList: String
+    warehouse: String
 
 # Non-sensitive info we'll be putting in the token
 UserSchema.virtual("token").get ->

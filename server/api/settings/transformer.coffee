@@ -33,7 +33,13 @@ class Transformer
 module.exports = new Transformer [
   from: "settings.saved", to: "saved"
 ,
-  from: "example.property", to: "exampleProperty"
+  from: "settings.engine", to: "engine"
 ,
-  from: "another.property", to: "another"
+  from: "settings.connectionString", to: "connectionString"
+,
+  from: "settings.query", to: "query"
+,
+  from: "settings.priceList", to: "priceList"
+,
+  from: "settings.warehouse", to: "warehouse"
 ]
