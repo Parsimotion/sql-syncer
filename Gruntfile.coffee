@@ -6,6 +6,11 @@ module.exports = (grunt) ->
   catch e
     localConfig = {}
 
+
+  azureWebsite = "sql-syncer" + if process.env.BRANCH_NAME is "master" then "" else "-#{process.env.BRANCH_NAME}"
+  azureGit = "#{azureWebsite}.scm.azurewebsites.net:443/sql-syncer.git"
+  remote = "https://#{process.env.AZURE_GIT_CREDENTIALS}@#{azureGit}"
+
   # Load grunt tasks automatically, when needed
   require("jit-grunt") grunt,
     express: "grunt-express-server"
@@ -232,7 +237,7 @@ module.exports = (grunt) ->
   # Automatically inject Bower components into the app
     wiredep:
       target:
-        src: "<%= yeoman.server %>/index.html"
+        src: "<%= yeoman.client %>/main.html"
         ignorePath: "<%= yeoman.client %>/"
         exclude: [
           /bootstrap-sass-official/
@@ -259,7 +264,8 @@ module.exports = (grunt) ->
   # concat, minify and revision files. Creates configurations in memory so
   # additional tasks can operate on them
     useminPrepare:
-      html: ["<%= yeoman.server %>/index.html"]
+      htmls:
+        src: ["<%= yeoman.client %>/*.html"]
       options:
         dest: "<%= yeoman.dist %>/public"
 
@@ -355,12 +361,11 @@ module.exports = (grunt) ->
           cwd: "<%= yeoman.client %>"
           dest: "<%= yeoman.dist %>/public"
           src: [
-            "*.{ico,png,txt}"
+            "*.{ico,png,txt,html}"
             ".htaccess"
             "bower_components/**/*"
             "assets/images/{,*/}*.{webp}"
             "assets/fonts/**/*"
-            "index.html"
           ]
         ,
           expand: true
@@ -374,6 +379,11 @@ module.exports = (grunt) ->
             "package.json"
             "server/**/*"
           ]
+        ,
+          expand: true
+          cwd: ".tmp"
+          src: ["{app,components}/**/landing.css"]
+          dest: "<%= yeoman.dist %>/public"
         ]
 
       styles:
@@ -390,16 +400,10 @@ module.exports = (grunt) ->
         connectCommits: false
         message: "Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%"
 
-      azureproduction:
+      azure:
         options:
-          remote: "https://#{process.env.AZURE_GIT_CREDENTIALS}@sql-syncer.scm.azurewebsites.net:443/sql-syncer.git"
+          remote: remote
           branch: "master"
-
-      openshift:
-        options:
-          remote: "openshift"
-          branch: "master"
-
 
   # Run some tasks in parallel to speed up the build process
     concurrent:
@@ -514,7 +518,7 @@ module.exports = (grunt) ->
     injector:
       options: {}
 
-    # Inject application script files into index.html (doesn't include bower)
+    # Inject application script files into main.html (doesn't include bower)
       scripts:
         options:
           transform: (filePath) ->
@@ -526,7 +530,7 @@ module.exports = (grunt) ->
           endtag: "<!-- endinjector -->"
 
         files:
-          "<%= yeoman.server %>/index.html": [
+          "<%= yeoman.client %>/main.html": [
             [
               "{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js"
               "!{.tmp,<%= yeoman.client %>}/app/app.js"
@@ -554,7 +558,7 @@ module.exports = (grunt) ->
           ]
 
 
-    # Inject component css into index.html
+    # Inject component css into main.html
       css:
         options:
           transform: (filePath) ->
@@ -566,7 +570,7 @@ module.exports = (grunt) ->
           endtag: "<!-- endinjector -->"
 
         files:
-          "<%= yeoman.server %>/index.html": ["<%= yeoman.client %>/{app,components}/**/*.css"]
+          "<%= yeoman.client %>/main.html": ["<%= yeoman.client %>/{app,components}/**/*.css"]
   }
 
   # Used for delaying livereload until after server has restarted
