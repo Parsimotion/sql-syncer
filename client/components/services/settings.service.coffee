@@ -11,7 +11,7 @@ app.factory "Settings", ($resource) ->
       transformRequest: (settings) ->
         JSON.stringify settings
 
-app.factory "Users", ($resource) ->
+app.factory "User", ($resource) ->
   $resource "/api/users/me", {},
     me:
       isArray: false

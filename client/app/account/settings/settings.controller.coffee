@@ -1,13 +1,19 @@
 'use strict'
 
-app.controller 'SettingsCtrl', ($scope, $state, Settings, Producteca) ->
+app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca) ->
   $scope.settings = Settings.query()
+  $scope.user = User.get()
+
+  $scope.user.$promise.then (me) =>
+    Producteca.then (Producteca) =>
+      producteca = new Producteca me.tokens.producteca
+      $scope.priceLists = producteca.priceLists()
+      $scope.warehouses = producteca.warehouses()
 
   $state.go "settings.step1"
   $scope.settings.$promise.then (settings) =>
     if not settings.saved
-      ;
-      # set to settings some default values
+      ; # set to settings some default values
 
   $scope.save = (form) ->
     $scope.submitted = true
