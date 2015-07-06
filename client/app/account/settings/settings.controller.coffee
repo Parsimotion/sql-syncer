@@ -10,7 +10,7 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca) ->
       $scope.priceLists = producteca.priceLists()
       $scope.warehouses = producteca.warehouses()
 
-  $state.go "settings.step1"
+  $state.go "settings.sqlconnection"
   $scope.settings.$promise.then (settings) =>
     if not settings.saved
       ; # set to settings some default values

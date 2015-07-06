@@ -8,10 +8,14 @@ angular.module 'sql-syncer-app'
     templateUrl: 'app/account/settings/settings.html'
     controller: 'SettingsCtrl'
 
-  .state 'settings.step1',
-    url: '/step1'
-    templateUrl: 'app/account/settings/settings-step1.html'
+  .state 'settings.sqlconnection',
+    url: '/sqlconnection'
+    templateUrl: 'app/account/settings/settings-sqlconnection.html'
 
-  .state 'settings.step2',
-    url: '/step2'
-    templateUrl: 'app/account/settings/settings-step2.html'
+  .state 'settings.test',
+    url: '/test'
+    templateUrl: 'app/account/settings/settings-test.html'
+
+  .state 'settings.syncer',
+    url: '/syncer'
+    templateUrl: 'app/account/settings/settings-syncer.html'
