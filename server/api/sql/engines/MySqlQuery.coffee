@@ -1,5 +1,5 @@
-Promise = require("bluebird")
-mysql = Promise.promisifyAll require("mysql")
+promisify = require("bluebird").promisifyAll
+mysql = require("mysql")
 module.exports =
 
 # A MySql query.
@@ -9,7 +9,7 @@ class MySqlQuery
 
   # Executes the query and returns a promise with the results.
   get: (query) =>
-    session = mysql.createConnection
+    session = promisify mysql.createConnection
       host: @connection.host
       database: @connection.database
       user: @connection.username
@@ -18,6 +18,5 @@ class MySqlQuery
     session.connect()
 
     session.queryAsync(query)
-      .spread (rows, fields) =>
-        { rows, fields }
+      .spread (rows, fields) => rows
       .finally => session.end()
