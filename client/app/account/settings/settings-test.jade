@@ -1,52 +1,46 @@
-div.large-info.alert.alert-success
+div.large-info.alert.alert-success(ng-show="testMessage == 'success'")
   | #[strong Todo está bien] #[br]
   | A continuación verás un ejemplo (las 5 primeras filas) de los datos usados para la sincronización.
 
-div.large-info.alert.alert-warning
+div.large-info.alert.alert-warning(ng-show="testMessage == 'empty'")
   | #[strong Hay algo raro] #[br]
   | La consulta no arrojó ningún resultado.
 
-div.large-info.alert.alert-warning
+div.large-info.alert.alert-warning(ng-show="testMessage == 'unknown_identifier'")
   | #[strong Hay algo raro] #[br]
   | No hemos encontrado una columna para el identificador del producto.
   | Recuerda que tiene que existir una columna llamada "barcode" o "sku".
   | Usa el operador 'as' de SQL:
   | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from esquema.productos]
 
-div.large-info.alert.alert-warning
+div.large-info.alert.alert-warning(ng-show="testMessage == 'two_identifiers'")
   | #[strong Hay algo raro] #[br]
   | No puedes tener una columna "barcode" y otra "sku" al mismo tiempo. Deja solo una para saber de qué modo sincronizar tus productos.
 
-div.large-info.alert.alert-warning
+div.large-info.alert.alert-warning(ng-show="testMessage == 'columns_not_found'")
   | #[strong Hay algo raro] #[br]
   | No hemos encontrado ni una columna "stock" ni una columna "price".
   | Usa el operador 'as' de SQL:
   | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from esquema.productos]
 
-div.large-info.alert.alert-danger
+div.large-info.alert.alert-danger(ng-show="testMessage == 'error'")
   | #[strong Hubo un error] #[br]
   | La consulta no se pudo realizar debido a un error:
-  | #[.monospaced (CÓDIGO DE ERROR)]
+  | #[.monospaced {{ result }}]
 
 .container
   table.table.table-hover.monospaced
     thead
       tr
-        th Firstname
-        th Lastname
-        th Email
+        th(ng-show="example.barcode") barcode
+        th(ng-show="example.sku") sku
+        th(ng-show="example.price") price
+        th(ng-show="example.stock") stock
     tbody
-      tr
-        td John
-        td Doe
-        td john@example.com
-      tr
-        td Mary
-        td Moe
-        td mary@example.com
-      tr
-        td July
-        td Dooley
-        td july@example.com
+      tr(ng-repeat="item in result | orderBy: 'identifier'")
+        td(ng-show="example.barcode") {{ item.barcode }}
+        td(ng-show="example.sku") {{ item.sku }}
+        td(ng-show="example.price") {{ item.price }}
+        td(ng-show="example.stock") {{ item.stock }}
 
 button.btn.btn-info(ui-sref='settings.syncer') Continuar
