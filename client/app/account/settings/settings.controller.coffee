@@ -12,7 +12,11 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca, Sql)
 
   $state.go "settings.sqlconnection"
   $scope.settings.$promise.then (settings) =>
-    settings.hours = [7..21].map (it) => hour: it, checked: false
+    hours = [7..21].map (it) => hour: it, checked: false
+    settings.hours =
+      if settings.hours?
+        _.uniq settings.hours.concat(hours), "hour"
+      else hours
 
   goToTestResults = (success, result) =>
     $scope.isTestingDb = false
