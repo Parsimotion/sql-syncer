@@ -2,9 +2,9 @@ mssql = require("mssql")
 Promise = require("bluebird")
 module.exports =
 
-# A MsSql query.
+# A SqlServer query.
 # connection = { host, username, password, database }
-class MsSqlQuery
+class SqlServerQuery
   constructor: (@connection) ->
 
   # Executes the query and returns a promise with the results.
