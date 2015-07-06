@@ -11,7 +11,7 @@ div.large-info.alert.alert-warning(ng-show="testMessage == 'unknown_identifier'"
   | No hemos encontrado una columna para el identificador del producto.
   | Recuerda que tiene que existir una columna llamada "barcode" o "sku".
   | Usa el operador 'as' de SQL:
-  | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from esquema.productos]
+  | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from productos]
 
 div.large-info.alert.alert-warning(ng-show="testMessage == 'two_identifiers'")
   | #[strong Hay algo raro] #[br]
@@ -21,7 +21,7 @@ div.large-info.alert.alert-warning(ng-show="testMessage == 'columns_not_found'")
   | #[strong Hay algo raro] #[br]
   | No hemos encontrado ni una columna "stock" ni una columna "price".
   | Usa el operador 'as' de SQL:
-  | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from esquema.productos]
+  | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from productos]
 
 div.large-info.alert.alert-danger(ng-show="testMessage == 'error'")
   | #[strong Hubo un error] #[br]
@@ -43,4 +43,4 @@ div.large-info.alert.alert-danger(ng-show="testMessage == 'error'")
         td(ng-show="example.price") {{ item.price }}
         td(ng-show="example.stock") {{ item.stock }}
 
-button.btn.btn-info(ui-sref='settings.syncer') Continuar
+button.btn.btn-info(ui-sref='settings.syncer', ng-disabled="testMessage != 'success'") Continuar
