@@ -45,15 +45,7 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca, Sql)
   $scope.test = =>
     $scope.isTestingDb = true
 
-    params = {
-      "engine": "mysql",
-      "host": "localhost",
-      "username": "root",
-      "password": "parsimotion",
-      "query": "select Descr, CodigoBarras as barcode, Cantidad as stock, Precio as price from sqlsyncer.productos"
-    }
-
-    Sql.test(params).success (response) =>
+    Sql.test($scope.settings).success (response) =>
       result = _(response)
         .map (item) =>
           item.identifier = item.barcode || item.sku
