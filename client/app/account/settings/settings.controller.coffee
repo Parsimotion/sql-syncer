@@ -12,8 +12,7 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca, Sql)
 
   $state.go "settings.sqlconnection"
   $scope.settings.$promise.then (settings) =>
-    if not settings.saved
-      ; # set to settings some default values
+    settings.hours = [7..21].map (it) => hour: it, checked: false
 
   goToTestResults = (success, result) =>
     $scope.isTestingDb = false

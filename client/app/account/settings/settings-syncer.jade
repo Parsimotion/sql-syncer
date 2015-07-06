@@ -6,5 +6,12 @@
   label Depósito
   select.form-control(name="warehouse", ng-model='settings.warehouse', ng-options='it for it in warehouses')
 
+.form-group
+  label Horas de sincronización
+    .checkbox(ng-repeat="it in settings.hours")
+      label
+        input(type='checkbox', value='', ng-model="it.checked")
+        | {{ it.hour }} hs.
+
 p.help-block  {{ message }}
 button.btn.btn-primary(type='submit', ng-disabled="submitted") Guardar

@@ -34,5 +34,9 @@ UserSchema = new Schema
     query: String
     priceList: String
     warehouse: String
+    hours: [
+      hour: Number
+      checked: Boolean
+    ]
 
 module.exports = mongoose.model("User", UserSchema)
