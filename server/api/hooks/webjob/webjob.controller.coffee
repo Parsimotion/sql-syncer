@@ -1,4 +1,4 @@
-User = require("../../user/user.model")
+User = include("api/user/user.model")
 
 exports.notification = (req, res) ->
   if not isSignatureValid req

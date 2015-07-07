@@ -1,7 +1,7 @@
 "use strict"
 express = require("express")
 controller = require("./settings.controller.coffee")
-auth = require("../../auth/auth.service")
+auth = include("auth/auth.service")
 
 router = express.Router()
 

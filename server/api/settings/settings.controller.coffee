@@ -1,5 +1,5 @@
 Transformer = require("./transformer")
-config = require("../../config/environment")
+config = include("config/environment")
 
 exports.index = (req, res) ->
   res.send 200, Transformer.toDto req.user
