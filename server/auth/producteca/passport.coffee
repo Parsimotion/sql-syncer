@@ -30,5 +30,5 @@ exports.setup = (User, config) ->
           producteca: accessToken
 
       user.save (err) ->
-        done err if err
+        return done err if err
         done null, user
