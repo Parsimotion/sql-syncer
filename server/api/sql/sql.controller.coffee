@@ -5,8 +5,10 @@ SqlSyncer = include("domain/sqlSyncer")
 exports.sync = (req, res) ->
   user = req.user
 
-  new SqlSyncer(user).sync().then (result) =>
-    res.send 200, result
+  new SqlSyncer(user)
+    .sync()
+    .then (result) =>
+      res.send 200, result
 
 exports.test = (req, res) ->
   testData = req.body || {}

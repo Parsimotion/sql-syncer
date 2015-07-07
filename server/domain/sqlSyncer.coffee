@@ -23,7 +23,7 @@ class SqlSyncer
       url: config.producteca.uri
 
   getAdjustmentsAndOptions: =>
-    SqlQuery = include("./engines/#{@settings.engine}Query")
+    SqlQuery = require("./engines/#{@settings.engine}Query")
     new SqlQuery(@settings.connection)
       .get @settings.query
       .then (data) =>
@@ -37,14 +37,15 @@ class SqlSyncer
             if example.sku? then "sku" else "barcode"
 
         adjustments:
-          data.map (it) => new Adjustment
-            identifier: it.barcode || it.sku
-            price: it.price
-            stock: it.stock
+          data.map (it) =>
+            new Adjustment
+              identifier: it.barcode || it.sku
+              price: "#{it.price}"
+              stock: "#{it.stock}"
         options: options
 
-  sync: ->
-    @getAdjustments().then ({ adjustments, options }) =>
-      @productecaApi.getProducts().then (products) ->
+  sync: =>
+    @getAdjustmentsAndOptions().then ({ adjustments, options }) =>
+      @productecaApi.getProducts().then (products) =>
         new Syncer(@productecaApi, options, products)
           .execute adjustments
