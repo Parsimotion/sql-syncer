@@ -8,8 +8,8 @@ div.large-info.alert.alert-warning(ng-show="testMessage == 'empty'")
 
 div.large-info.alert.alert-warning(ng-show="testMessage == 'unknown_identifier'")
   | #[strong Hay algo raro] #[br]
-  | No hemos encontrado una columna para el identificador del producto.
-  | Recuerda que tiene que existir una columna llamada "barcode" o "sku".
+  | No hemos encontrado una columna para el identificador del producto. #[br]
+  | Recuerda que tiene que existir una columna llamada "barcode" o "sku". #[br]
   | Usa el operador 'as' de SQL:
   | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from productos]
 
@@ -19,7 +19,7 @@ div.large-info.alert.alert-warning(ng-show="testMessage == 'two_identifiers'")
 
 div.large-info.alert.alert-warning(ng-show="testMessage == 'columns_not_found'")
   | #[strong Hay algo raro] #[br]
-  | No hemos encontrado ni una columna "stock" ni una columna "price".
+  | No hemos encontrado ni una columna "stock" ni una columna "price". #[br]
   | Usa el operador 'as' de SQL:
   | #[.monospaced select Descripcion, CodigoBarras as barcode, Disponibilidad as stock from productos]
 
