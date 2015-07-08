@@ -12,10 +12,18 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca, Sql)
 
   $state.go "settings.sqlconnection"
   $scope.settings.$promise.then (settings) =>
-    hours = [7..21].map (it) => hour: it, checked: false
+    makeDate = (hour) =>
+      date = new Date() ; date.setHours hour
+      date.setMinutes 0 ; date.setSeconds 0 ; date.setMilliseconds 0
+      date
+
+    hours = [7..21].map (it) => i: it, date: makeDate(it), checked: false
     settings.hours =
       if settings.hours?
-        _.uniq settings.hours.concat(hours), "hour"
+        merge = settings.hours
+          .map (hour) => _.assign hour, date: new Date(hour.date)
+          .concat(hours)
+        _.uniq merge, "i"
       else hours
 
   goToTestResults = (success, result) =>

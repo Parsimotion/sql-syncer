@@ -11,7 +11,7 @@
     .checkbox(ng-repeat="it in settings.hours")
       label
         input(type='checkbox', value='', ng-model="it.checked")
-        | {{ it.hour }} hs.
+        | {{ it.date.getHours() }} hs.
 
 p.help-block  {{ message }}
 button.btn.btn-primary(type='submit', ng-disabled="submitted") Guardar

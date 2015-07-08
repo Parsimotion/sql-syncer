@@ -35,7 +35,8 @@ UserSchema = new Schema
     priceList: String
     warehouse: String
     hours: [
-      hour: Number
+      i: Number
+      date: Date
       checked: Boolean
     ]
 
