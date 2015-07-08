@@ -10,6 +10,12 @@ exports.sync = (req, res) ->
     .then (result) =>
       res.send 200, result
 
+exports.batchSync = (Req, res) ->
+  #User.find().map (users) =>
+  #  new SqlSyncer(user)
+  #    .batchSync()
+
+
 exports.test = (req, res) ->
   testData = req.body || {}
   { engine, query, connection } = testData

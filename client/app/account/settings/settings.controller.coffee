@@ -13,11 +13,13 @@ app.controller 'SettingsCtrl', ($scope, $state, Settings, User, Producteca, Sql)
   $state.go "settings.sqlconnection"
   $scope.settings.$promise.then (settings) =>
     makeDate = (hour) =>
-      date = new Date() ; date.setHours hour
-      date.setMinutes 0 ; date.setSeconds 0 ; date.setMilliseconds 0
+      date = new Date() ; date.setUTCHours hour
+      date.setUTCMinutes 0 ; date.setUTCSeconds 0 ; date.setUTCMilliseconds 0
       date
 
-    hours = [7..21].map (it) => i: it, date: makeDate(it), checked: false
+    hours = [10..23].concat(0).map (it) =>
+      i: it, date: makeDate(it), checked: false
+
     settings.hours =
       if settings.hours?
         merge = settings.hours
