@@ -7,5 +7,6 @@ router = express.Router()
 
 router.post "/sync", auth.authenticated, controller.sync
 router.post "/connection/test", auth.authenticated, controller.test
+router.post "/batchsync", controller.batchSync
 
 module.exports = router

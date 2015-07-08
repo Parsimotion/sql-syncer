@@ -10,11 +10,18 @@ exports.sync = (req, res) ->
     .then (result) =>
       res.send 200, result
 
-exports.batchSync = (Req, res) ->
-  #User.find().map (users) =>
-  #  new SqlSyncer(user)
-  #    .batchSync()
+exports.batchSync = (req, res) ->
+  if not isSignatureValid req
+    return res.send 403, "Invalid signature"
 
+  res.status(200).end()
+
+  currentHour = new Date().getUTCHours()
+  User
+    .findAsync({ "settings.hours": { $elemMatch: { i: currentHour, checked: true } } })
+    .map (user) =>
+      console.log "#{currentHour}hs: It's time to sync the user #{user.name}..."
+      new SqlSyncer(user).sync()
 
 exports.test = (req, res) ->
   testData = req.body || {}
@@ -28,3 +35,6 @@ exports.test = (req, res) ->
     .get query
     .then (data) -> res.send 200, data
     .catch (e) -> res.send 400, e
+
+isSignatureValid = (req) ->
+  req.headers["signature"] is (process.env.WEBJOB_SIGNATURE or "default")
