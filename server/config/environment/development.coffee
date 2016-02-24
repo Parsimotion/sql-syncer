@@ -6,4 +6,4 @@ module.exports =
 
   # MongoDB connection options
   mongo:
-    uri: "mongodb://localhost/sql-syncer-dev"
+    uri: process.env.MONGO_URI or "mongodb://localhost/sql-syncer-dev"
